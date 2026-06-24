@@ -1,0 +1,1912 @@
+/* ============================================================
+   SCRIPTFORGE — Design System
+   🪄 Harry Potter × 🕸️ Wednesday × 🐭 Stuart Little
+   Magical-Gothic-Whimsical Fusion Theme
+   ============================================================ */
+
+/* ── Fonts ─────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* ── CSS Variables (Design Tokens) ─────────────────────────── */
+:root {
+  /* 🪄 Harry Potter: Deep magical darks + warm golds */
+  --hp-maroon: #740001;
+  --hp-gold: #D3A625;
+  --hp-gold-light: #ECBA53;
+  --hp-parchment: #F5E6C8;
+  --hp-midnight: #0D0D2B;
+  --hp-ink: #1A1A2E;
+  --hp-candle: #FFD700;
+  --hp-candle-glow: rgba(255, 215, 0, 0.3);
+
+  /* 🕸️ Wednesday: Gothic blacks + moody purples */
+  --wed-black: #0A0A0A;
+  --wed-charcoal: #1C1C1E;
+  --wed-ash: #2C2C2E;
+  --wed-purple: #4A0E4E;
+  --wed-purple-light: #6B2D6B;
+  --wed-steel: #48484A;
+  --wed-stained-glass: rgba(74, 14, 78, 0.3);
+  --wed-rain: rgba(160, 170, 190, 0.15);
+
+  /* 🐭 Stuart Little: Warm cozy tones */
+  --sl-cream: #FFF8E7;
+  --sl-warm-yellow: #F5C542;
+  --sl-honey: #E8A33D;
+  --sl-rose: #C17767;
+  --sl-sage: #7D9B76;
+  --sl-sky: #87CEEB;
+
+  /* Core palette — blended */
+  --bg-void: #08080F;
+  --bg-deep: #0D0D1A;
+  --bg-surface: #121218;
+  --bg-elevated: #1A1A24;
+  --bg-panel: #1E1E2A;
+
+  /* Glass effects — gothic stained glass feel */
+  --glass-bg: rgba(13, 13, 26, 0.75);
+  --glass-border: rgba(211, 166, 37, 0.12);
+  --glass-highlight: rgba(255, 248, 231, 0.03);
+  --glass-blur: 20px;
+  --glass-gothic: rgba(74, 14, 78, 0.08);
+
+  /* Accent colors — magical palette */
+  --accent-primary: var(--hp-gold);
+  --accent-primary-glow: rgba(211, 166, 37, 0.35);
+  --accent-secondary: var(--wed-purple-light);
+  --accent-secondary-glow: rgba(107, 45, 107, 0.3);
+  --accent-gold: var(--hp-gold-light);
+  --accent-gold-glow: rgba(236, 186, 83, 0.3);
+  --accent-rose: var(--hp-maroon);
+  --accent-rose-glow: rgba(116, 0, 1, 0.3);
+  --accent-emerald: var(--sl-sage);
+  --accent-emerald-glow: rgba(125, 155, 118, 0.3);
+
+  /* Faction colors — movie-inspired */
+  --faction-priesthood: var(--hp-gold);
+  --faction-rebellion: var(--hp-maroon);
+  --faction-guild: var(--sl-honey);
+  --faction-depths: var(--wed-purple-light);
+  --faction-skyborn: var(--sl-rose);
+
+  /* Text — parchment-inspired */
+  --text-primary: #E8DFD0;
+  --text-secondary: #A09888;
+  --text-muted: #6B6155;
+  --text-accent: var(--hp-gold-light);
+  --text-glow: rgba(211, 166, 37, 0.5);
+
+  /* Severity */
+  --severity-contradiction: #C62828;
+  --severity-warning: var(--sl-warm-yellow);
+  --severity-info: #5C86B4;
+  --severity-ok: var(--sl-sage);
+
+  /* Spacing */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+
+  /* Border radius */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  /* Transitions */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-dramatic: 800ms cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Typography — magical-gothic */
+  --font-display: 'Cinzel Decorative', 'Playfair Display', serif;
+  --font-body: 'EB Garamond', 'Playfair Display', Georgia, serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Shadows — warm candlelit */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.6);
+  --shadow-glow: 0 0 20px var(--accent-primary-glow);
+  --shadow-glow-strong: 0 0 40px var(--accent-primary-glow);
+  --shadow-candle: 0 0 30px rgba(255, 215, 0, 0.15);
+
+  /* Layout */
+  --sidebar-width: 280px;
+  --header-height: 68px;
+  --content-max-width: 1400px;
+}
+
+/* ── Reset & Base ──────────────────────────────────────────── */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--text-primary);
+  background: var(--bg-void);
+  line-height: 1.6;
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+  font-size: 1.05rem;
+}
+
+/* ── Scrollbar Styling — gothic thin ──────────────────────── */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(211, 166, 37, 0.2);
+  border-radius: var(--radius-full);
+  transition: background var(--transition-fast);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(211, 166, 37, 0.4);
+}
+
+/* ── App Layout ───────────────────────────────────────────── */
+#app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ── Background Effects — Movie Magic ─────────────────────── */
+#background-effects {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* Hollywood Mashup Cinematic Background */
+#background-effects::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('bg.png');
+  background-size: 100% 100%; /* Forces the entire image to fit without cropping */
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.35;
+  animation: cinematicPulse 10s ease-in-out infinite alternate;
+  z-index: -1;
+  filter: contrast(1.2) brightness(0.7) blur(2px);
+  mix-blend-mode: luminosity;
+}
+
+@keyframes cinematicPulse {
+  0% { opacity: 0.35; filter: contrast(1.2) brightness(0.7) blur(2px); }
+  100% { opacity: 0.45; filter: contrast(1.3) brightness(0.8) blur(1px); }
+}
+
+/* 🪄 Harry Potter — mystical ambient glow */
+.nebula {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.12;
+  animation: nebulaDrift 40s ease-in-out infinite alternate;
+}
+
+.nebula-1 {
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle, var(--hp-gold), transparent 70%);
+  top: -300px;
+  right: -200px;
+}
+
+.nebula-2 {
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, var(--wed-purple), transparent 70%);
+  bottom: -200px;
+  left: -150px;
+  animation-delay: -20s;
+}
+
+.nebula-3 {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, var(--hp-maroon), transparent 70%);
+  top: 50%;
+  left: 40%;
+  animation-delay: -10s;
+  opacity: 0.06;
+}
+
+/* 🕸️ Wednesday — rain effect overlay */
+.nebula::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 98px,
+    var(--wed-rain) 98px,
+    var(--wed-rain) 100px
+  );
+  opacity: 0.3;
+  animation: rainShift 8s linear infinite;
+}
+
+@keyframes rainShift {
+  from { transform: translateY(-100%); }
+  to { transform: translateY(100%); }
+}
+
+@keyframes nebulaDrift {
+  0% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(40px, -30px) scale(1.05); }
+  66% { transform: translate(-30px, 40px) scale(0.95); }
+  100% { transform: translate(20px, 20px) scale(1.02); }
+}
+
+/* Particle canvas (candles, sparkles, rain) */
+#particles-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Gothic vignette overlay */
+#app::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.4) 100%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ── Header ───────────────────────────────────────────────── */
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--header-height);
+  padding: 0 var(--space-lg);
+  background: rgba(10, 10, 15, 0.85);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border-bottom: 1px solid rgba(211, 166, 37, 0.1);
+  z-index: 100;
+  position: relative;
+}
+
+/* Gothic ornamental border under header */
+.app-header::after {
+  content: '⚜ · ⚜ · ⚜ · ⚜ · ⚜ · ⚜ · ⚜ · ⚜ · ⚜ · ⚜ · ⚜ · ⚜ · ⚜ · ⚜ · ⚜ · ⚜ · ⚜ · ⚜ · ⚜';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  font-size: 0.5rem;
+  color: rgba(211, 166, 37, 0.15);
+  letter-spacing: 4px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  cursor: pointer;
+  transition: transform var(--transition-fast);
+}
+
+.logo:hover {
+  transform: scale(1.02);
+}
+
+.logo-icon {
+  width: 42px;
+  height: 42px;
+  position: relative;
+}
+
+.logo-icon svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 0 8px rgba(211, 166, 37, 0.3));
+}
+
+.logo-text {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 4px;
+  background: linear-gradient(135deg, var(--hp-gold), var(--hp-parchment), var(--hp-gold));
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 5s ease-in-out infinite;
+  text-shadow: none;
+}
+
+@keyframes shimmer {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.logo-subtitle {
+  font-family: var(--font-body);
+  font-size: 0.6rem;
+  letter-spacing: 3px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-top: -2px;
+  font-style: italic;
+}
+
+/* Header navigation — gothic tabs */
+.header-nav {
+  display: flex;
+  gap: var(--space-xs);
+  align-items: center;
+}
+
+.nav-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(211, 166, 37, 0.08), transparent);
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.nav-btn:hover {
+  color: var(--text-primary);
+  border-color: rgba(211, 166, 37, 0.15);
+}
+
+.nav-btn:hover::before {
+  opacity: 1;
+}
+
+.nav-btn.active {
+  color: var(--hp-gold);
+  border-color: rgba(211, 166, 37, 0.3);
+  background: rgba(211, 166, 37, 0.06);
+  box-shadow: 0 0 15px rgba(211, 166, 37, 0.1);
+}
+
+/* Gothic underline for active nav */
+.nav-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 20%;
+  right: 20%;
+  height: 1px;
+  background: var(--hp-gold);
+  box-shadow: 0 0 6px var(--hp-gold);
+}
+
+.nav-btn .nav-icon {
+  font-size: 1.1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.nav-btn .nav-label {
+  position: relative;
+  z-index: 1;
+}
+
+/* Header stats */
+.header-stats {
+  display: flex;
+  gap: var(--space-lg);
+  align-items: center;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.stat-value {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--hp-gold);
+}
+
+.stat-label {
+  font-size: 0.6rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-family: var(--font-body);
+}
+
+/* ── Main Content ─────────────────────────────────────────── */
+.app-content {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+}
+
+.view-container {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: var(--space-xl);
+}
+
+/* View transitions — magical fade */
+.view-enter {
+  animation: viewEnter var(--transition-dramatic) forwards;
+}
+
+.view-exit {
+  animation: viewExit var(--transition-normal) forwards;
+}
+
+@keyframes viewEnter {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes viewExit {
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0; transform: translateY(-15px); }
+}
+
+/* ── Glass Panel — Stained Glass Gothic ───────────────────── */
+.glass-panel {
+  background: rgba(13, 13, 22, 0.7);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid rgba(211, 166, 37, 0.1);
+  border-radius: var(--radius-md);
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 1px 0 rgba(255, 248, 231, 0.03);
+}
+
+/* Gothic top ornament line */
+.glass-panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(211, 166, 37, 0.2), transparent);
+}
+
+.glass-panel-inner {
+  padding: var(--space-xl);
+}
+
+/* ── Section Headers — Magical Typography ─────────────────── */
+.section-header {
+  margin-bottom: var(--space-xl);
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: 2px;
+  margin-bottom: var(--space-sm);
+}
+
+.section-subtitle {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  max-width: 600px;
+  font-style: italic;
+}
+
+.section-divider {
+  width: 80px;
+  height: 1px;
+  background: linear-gradient(90deg, var(--hp-gold), transparent);
+  margin-top: var(--space-md);
+  position: relative;
+}
+
+.section-divider::before {
+  content: '◆';
+  position: absolute;
+  left: 0;
+  top: -7px;
+  font-size: 0.5rem;
+  color: var(--hp-gold);
+}
+
+/* ── Cards — Parchment feel ───────────────────────────────── */
+.card {
+  background: rgba(18, 18, 24, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(211, 166, 37, 0.08);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  transition: all var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+/* Subtle parchment texture overlay */
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(ellipse at 20% 50%, rgba(211, 166, 37, 0.02), transparent 60%),
+    radial-gradient(ellipse at 80% 50%, rgba(74, 14, 78, 0.02), transparent 60%);
+  pointer-events: none;
+}
+
+.card:hover {
+  border-color: rgba(211, 166, 37, 0.2);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-candle), 0 4px 20px rgba(0,0,0,0.3);
+}
+
+.card-accent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  border-radius: 3px 0 0 3px;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-md);
+}
+
+.card-icon {
+  font-size: 1.5rem;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(211, 166, 37, 0.06);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(211, 166, 37, 0.1);
+}
+
+.card-title {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: 0.5px;
+}
+
+.card-description {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  font-family: var(--font-body);
+}
+
+.card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  margin-top: var(--space-md);
+}
+
+/* ── Tags / Badges — Magical seals ────────────────────────── */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  border-radius: var(--radius-full);
+  border: 1px solid;
+  font-family: var(--font-body);
+}
+
+.tag-primary {
+  color: var(--hp-gold);
+  border-color: rgba(211, 166, 37, 0.25);
+  background: rgba(211, 166, 37, 0.08);
+}
+
+.tag-gold {
+  color: var(--sl-warm-yellow);
+  border-color: rgba(245, 197, 66, 0.25);
+  background: rgba(245, 197, 66, 0.08);
+}
+
+.tag-rose {
+  color: #D4736E;
+  border-color: rgba(212, 115, 110, 0.25);
+  background: rgba(212, 115, 110, 0.08);
+}
+
+.tag-cyan {
+  color: #7DA4B5;
+  border-color: rgba(125, 164, 181, 0.25);
+  background: rgba(125, 164, 181, 0.08);
+}
+
+.tag-emerald {
+  color: var(--sl-sage);
+  border-color: rgba(125, 155, 118, 0.25);
+  background: rgba(125, 155, 118, 0.08);
+}
+
+/* ── Buttons — Magical/Gothic styled ──────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-lg);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  border: none;
+  position: relative;
+  overflow: hidden;
+  letter-spacing: 0.5px;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--hp-maroon), #5C0001);
+  color: var(--hp-parchment);
+  box-shadow: 0 4px 15px rgba(116, 0, 1, 0.3);
+  border: 1px solid rgba(211, 166, 37, 0.2);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(116, 0, 1, 0.4), 0 0 20px rgba(211, 166, 37, 0.15);
+  border-color: rgba(211, 166, 37, 0.4);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--text-primary);
+  border: 1px solid rgba(211, 166, 37, 0.15);
+}
+
+.btn-secondary:hover {
+  border-color: var(--hp-gold);
+  background: rgba(211, 166, 37, 0.06);
+  box-shadow: 0 0 15px rgba(211, 166, 37, 0.08);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text-secondary);
+  border: none;
+}
+
+.btn-ghost:hover {
+  color: var(--hp-gold);
+  background: rgba(211, 166, 37, 0.05);
+}
+
+.btn-lg {
+  padding: var(--space-md) var(--space-xl);
+  font-size: 1rem;
+  border-radius: var(--radius-md);
+}
+
+.btn-icon {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border-radius: var(--radius-md);
+}
+
+/* Magical ripple effect */
+.btn::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(211, 166, 37, 0.15);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s, opacity 0.6s;
+  opacity: 0;
+}
+
+.btn:active::after {
+  width: 300px;
+  height: 300px;
+  opacity: 0;
+}
+
+/* ── Grid Layouts ─────────────────────────────────────────── */
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--space-lg);
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: var(--space-lg);
+}
+
+.grid-4 {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: var(--space-md);
+}
+
+/* ── Genesis View (Create World) — Hogwarts Entrance ──────── */
+.genesis-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - var(--header-height));
+  padding: var(--space-2xl);
+}
+
+.genesis-card {
+  max-width: 700px;
+  width: 100%;
+  text-align: center;
+}
+
+.genesis-title {
+  font-family: var(--font-display);
+  font-size: 2.8rem;
+  font-weight: 900;
+  background: linear-gradient(135deg, var(--hp-gold), var(--hp-parchment), var(--hp-gold), var(--hp-gold-light));
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 6s ease-in-out infinite;
+  margin-bottom: var(--space-md);
+  line-height: 1.2;
+  letter-spacing: 3px;
+  filter: drop-shadow(0 2px 4px rgba(211, 166, 37, 0.2));
+}
+
+.genesis-subtitle {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-2xl);
+  line-height: 1.7;
+  font-style: italic;
+  font-family: var(--font-body);
+}
+
+.genesis-input-wrapper {
+  position: relative;
+  margin-bottom: var(--space-xl);
+}
+
+.genesis-input {
+  width: 100%;
+  padding: var(--space-lg);
+  padding-right: 60px;
+  background: rgba(13, 13, 22, 0.9);
+  border: 1px solid rgba(211, 166, 37, 0.15);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  line-height: 1.7;
+  resize: vertical;
+  min-height: 120px;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.genesis-input:focus {
+  outline: none;
+  border-color: var(--hp-gold);
+  box-shadow: 0 0 25px rgba(211, 166, 37, 0.15), inset 0 0 20px rgba(211, 166, 37, 0.03);
+}
+
+.genesis-input::placeholder {
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.genesis-forge-btn {
+  padding: var(--space-md) var(--space-2xl);
+  font-size: 1.1rem;
+  font-family: var(--font-display);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, var(--hp-maroon), #8B0000) !important;
+  border: 1px solid rgba(211, 166, 37, 0.3) !important;
+}
+
+.genesis-forge-btn:hover {
+  box-shadow: 0 0 30px rgba(116, 0, 1, 0.4), 0 0 60px rgba(211, 166, 37, 0.1) !important;
+}
+
+/* Genesis progress */
+.genesis-progress {
+  margin-top: var(--space-2xl);
+}
+
+.progress-phase {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  margin-bottom: var(--space-sm);
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-normal);
+  opacity: 0.3;
+}
+
+.progress-phase.active {
+  opacity: 1;
+  background: rgba(211, 166, 37, 0.06);
+  border-left: 2px solid var(--hp-gold);
+}
+
+.progress-phase.complete {
+  opacity: 0.7;
+}
+
+.progress-phase .phase-icon {
+  font-size: 1.5rem;
+  width: 36px;
+  text-align: center;
+}
+
+.progress-phase .phase-text {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  font-family: var(--font-body);
+}
+
+.progress-phase.active .phase-text {
+  color: var(--hp-gold);
+}
+
+.progress-phase.complete .phase-text {
+  color: var(--sl-sage);
+}
+
+.progress-bar-container {
+  width: 100%;
+  height: 3px;
+  background: rgba(211, 166, 37, 0.08);
+  border-radius: var(--radius-full);
+  margin-top: var(--space-lg);
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--hp-maroon), var(--hp-gold));
+  border-radius: var(--radius-full);
+  transition: width var(--transition-slow);
+  box-shadow: 0 0 10px rgba(211, 166, 37, 0.3);
+}
+
+/* Quick start buttons — enchanted chips */
+.genesis-quickstart {
+  display: flex;
+  gap: var(--space-md);
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: var(--space-lg);
+}
+
+.quickstart-chip {
+  padding: var(--space-sm) var(--space-md);
+  background: rgba(211, 166, 37, 0.04);
+  border: 1px solid rgba(211, 166, 37, 0.12);
+  border-radius: var(--radius-full);
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.quickstart-chip:hover {
+  background: rgba(211, 166, 37, 0.1);
+  border-color: var(--hp-gold);
+  color: var(--hp-gold);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-candle);
+}
+
+/* ── World Map View ───────────────────────────────────────── */
+.map-container {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: var(--space-xl);
+  min-height: calc(100vh - var(--header-height) - var(--space-2xl) * 2);
+}
+
+.map-canvas-wrapper {
+  position: relative;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid rgba(211, 166, 37, 0.1);
+  background: var(--bg-surface);
+}
+
+.map-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.map-location-node {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--hp-gold);
+  border: 2px solid rgba(245, 230, 200, 0.4);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  animation: candleFlicker 3s ease-in-out infinite;
+  z-index: 10;
+  box-shadow: 0 0 12px rgba(211, 166, 37, 0.4);
+}
+
+.map-location-node:hover {
+  transform: scale(1.6);
+  box-shadow: 0 0 30px rgba(211, 166, 37, 0.6);
+  animation: none;
+}
+
+.map-location-node.selected {
+  transform: scale(1.6);
+  box-shadow: 0 0 35px rgba(211, 166, 37, 0.5);
+  animation: none;
+  border-color: var(--hp-parchment);
+}
+
+@keyframes candleFlicker {
+  0%, 100% { box-shadow: 0 0 8px rgba(211, 166, 37, 0.3); opacity: 1; }
+  25% { box-shadow: 0 0 14px rgba(211, 166, 37, 0.5); opacity: 0.95; }
+  50% { box-shadow: 0 0 20px rgba(211, 166, 37, 0.4); opacity: 1; }
+  75% { box-shadow: 0 0 10px rgba(211, 166, 37, 0.35); opacity: 0.97; }
+}
+
+.map-location-label {
+  position: absolute;
+  white-space: nowrap;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--hp-parchment);
+  text-shadow: 0 1px 6px rgba(0,0,0,0.9);
+  pointer-events: none;
+  transform: translateX(-50%);
+  bottom: -20px;
+  left: 50%;
+  font-family: var(--font-body);
+}
+
+.map-sidebar {
+  overflow-y: auto;
+}
+
+.map-detail-panel {
+  position: sticky;
+  top: 0;
+}
+
+/* ── Character Cards — Magical Portrait Style ─────────────── */
+.character-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: var(--space-lg);
+}
+
+.character-card {
+  background: rgba(13, 13, 22, 0.7);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(211, 166, 37, 0.08);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition: all var(--transition-normal);
+  cursor: pointer;
+}
+
+.character-card:hover {
+  border-color: rgba(211, 166, 37, 0.25);
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-candle), 0 8px 30px rgba(0,0,0,0.3);
+}
+
+/* 🪄 Magical portrait frame effect */
+.character-card:hover::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 1px solid rgba(211, 166, 37, 0.15);
+  border-radius: var(--radius-md);
+  pointer-events: none;
+  box-shadow: inset 0 0 30px rgba(211, 166, 37, 0.03);
+}
+
+.character-portrait {
+  height: 200px;
+  background: linear-gradient(135deg, rgba(74, 14, 78, 0.15), rgba(116, 0, 1, 0.1));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Gothic frame corners */
+.character-portrait::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 1px solid rgba(211, 166, 37, 0.06);
+  pointer-events: none;
+}
+
+.character-portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.character-portrait-placeholder {
+  font-size: 4rem;
+  opacity: 0.3;
+}
+
+.character-faction-badge {
+  position: absolute;
+  top: var(--space-md);
+  right: var(--space-md);
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  backdrop-filter: blur(10px);
+  font-family: var(--font-body);
+}
+
+.character-info {
+  padding: var(--space-lg);
+}
+
+.character-name {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--hp-parchment);
+  margin-bottom: var(--space-xs);
+  letter-spacing: 0.5px;
+}
+
+.character-role {
+  font-size: 0.85rem;
+  color: var(--hp-gold);
+  margin-bottom: var(--space-md);
+  font-weight: 500;
+  font-style: italic;
+}
+
+.character-desc {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.character-senses {
+  display: flex;
+  gap: var(--space-sm);
+  margin-top: var(--space-md);
+  padding-top: var(--space-md);
+  border-top: 1px solid rgba(211, 166, 37, 0.08);
+}
+
+.sense-indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  font-size: 0.6rem;
+  color: var(--text-muted);
+}
+
+.sense-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.sense-dot.active { background: var(--sl-sage); box-shadow: 0 0 6px rgba(125, 155, 118, 0.5); }
+.sense-dot.fading { background: var(--sl-warm-yellow); box-shadow: 0 0 6px rgba(245, 197, 66, 0.4); }
+.sense-dot.gone { background: var(--hp-maroon); opacity: 0.5; }
+
+/* ── Character Detail Modal — Enchanted Scroll ────────────── */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(6, 6, 12, 0.88);
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-normal);
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.modal-content {
+  max-width: 800px;
+  width: 90%;
+  max-height: 85vh;
+  overflow-y: auto;
+  background: var(--bg-surface);
+  border: 1px solid rgba(211, 166, 37, 0.15);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg), 0 0 80px rgba(211, 166, 37, 0.08);
+  animation: modalEnter var(--transition-dramatic) forwards;
+}
+
+@keyframes modalEnter {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(20px);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    filter: blur(0);
+  }
+}
+
+.modal-close {
+  position: absolute;
+  top: var(--space-md);
+  right: var(--space-md);
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.4);
+  border: 1px solid rgba(211, 166, 37, 0.1);
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  z-index: 10;
+}
+
+.modal-close:hover {
+  background: rgba(116, 0, 1, 0.3);
+  border-color: var(--hp-maroon);
+  color: #D4736E;
+}
+
+/* ── Faction Cards ────────────────────────────────────────── */
+.faction-card {
+  position: relative;
+  overflow: visible;
+}
+
+.faction-power-bar {
+  height: 4px;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: var(--radius-full);
+  margin-top: var(--space-md);
+  overflow: hidden;
+}
+
+.faction-power-fill {
+  height: 100%;
+  border-radius: var(--radius-full);
+  transition: width 1.5s ease-out;
+}
+
+.faction-symbol {
+  font-size: 2.5rem;
+  margin-bottom: var(--space-md);
+}
+
+/* ── Timeline — Ancient Scroll ────────────────────────────── */
+.timeline-container {
+  position: relative;
+  padding-left: var(--space-3xl);
+}
+
+.timeline-line {
+  position: absolute;
+  left: 20px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--hp-gold), var(--hp-maroon), var(--wed-purple), var(--hp-gold));
+}
+
+.timeline-event {
+  position: relative;
+  margin-bottom: var(--space-xl);
+  padding-left: var(--space-xl);
+  animation: fadeInLeft var(--transition-dramatic) forwards;
+  opacity: 0;
+}
+
+.timeline-event:nth-child(1) { animation-delay: 0.1s; }
+.timeline-event:nth-child(2) { animation-delay: 0.2s; }
+.timeline-event:nth-child(3) { animation-delay: 0.3s; }
+.timeline-event:nth-child(4) { animation-delay: 0.4s; }
+.timeline-event:nth-child(5) { animation-delay: 0.5s; }
+.timeline-event:nth-child(6) { animation-delay: 0.6s; }
+.timeline-event:nth-child(7) { animation-delay: 0.7s; }
+.timeline-event:nth-child(8) { animation-delay: 0.8s; }
+.timeline-event:nth-child(9) { animation-delay: 0.9s; }
+.timeline-event:nth-child(10) { animation-delay: 1.0s; }
+.timeline-event:nth-child(11) { animation-delay: 1.1s; }
+.timeline-event:nth-child(12) { animation-delay: 1.2s; }
+.timeline-event:nth-child(13) { animation-delay: 1.3s; }
+.timeline-event:nth-child(14) { animation-delay: 1.4s; }
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.timeline-dot {
+  position: absolute;
+  left: -36px;
+  top: 6px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid var(--hp-gold);
+  background: var(--bg-void);
+  z-index: 2;
+}
+
+.timeline-dot.pivotal {
+  background: var(--hp-gold);
+  box-shadow: 0 0 12px rgba(211, 166, 37, 0.4);
+}
+
+.timeline-dot.major {
+  background: var(--hp-maroon);
+  border-color: var(--hp-maroon);
+  box-shadow: 0 0 8px rgba(116, 0, 1, 0.4);
+}
+
+.timeline-year {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--hp-gold);
+  margin-bottom: var(--space-xs);
+}
+
+.timeline-era {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: var(--space-xs);
+  font-family: var(--font-body);
+}
+
+.timeline-event-name {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--hp-parchment);
+  margin-bottom: var(--space-xs);
+  letter-spacing: 0.5px;
+}
+
+.timeline-event-desc {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  font-family: var(--font-body);
+}
+
+/* Era filter */
+.era-filters {
+  display: flex;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-xl);
+  flex-wrap: wrap;
+}
+
+.era-chip {
+  padding: var(--space-sm) var(--space-md);
+  border: 1px solid rgba(211, 166, 37, 0.1);
+  border-radius: var(--radius-full);
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  background: transparent;
+  font-family: var(--font-body);
+}
+
+.era-chip:hover, .era-chip.active {
+  border-color: var(--hp-gold);
+  color: var(--hp-gold);
+  background: rgba(211, 166, 37, 0.06);
+  box-shadow: 0 0 10px rgba(211, 166, 37, 0.08);
+}
+
+/* ── Story View — Ancient Book ────────────────────────────── */
+.story-layout {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: var(--space-xl);
+  min-height: calc(100vh - var(--header-height) - var(--space-2xl) * 2);
+}
+
+.story-reader {
+  max-width: 800px;
+}
+
+.story-content {
+  font-size: 1.08rem;
+  line-height: 2;
+  color: var(--text-primary);
+  font-family: var(--font-body);
+}
+
+.story-content p {
+  margin-bottom: var(--space-lg);
+  text-indent: 2em;
+}
+
+.story-content p:first-child {
+  text-indent: 0;
+}
+
+/* 🪄 Magical drop cap */
+.story-content p:first-child::first-letter {
+  font-family: var(--font-display);
+  font-size: 4rem;
+  float: left;
+  line-height: 0.75;
+  margin-right: 10px;
+  margin-top: 6px;
+  color: var(--hp-gold);
+  text-shadow: 0 0 15px rgba(211, 166, 37, 0.3);
+}
+
+.story-content blockquote {
+  border-left: 2px solid var(--hp-gold);
+  padding-left: var(--space-lg);
+  margin: var(--space-xl) 0;
+  font-style: italic;
+  color: var(--hp-gold-light);
+  opacity: 0.9;
+}
+
+.story-content h1, .story-content h2 {
+  font-family: var(--font-display);
+  color: var(--hp-parchment);
+  margin: var(--space-xl) 0 var(--space-md);
+  letter-spacing: 1px;
+}
+
+.story-content hr {
+  border: none;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(211, 166, 37, 0.2), transparent);
+  margin: var(--space-xl) 0;
+}
+
+.story-content strong {
+  color: var(--hp-gold);
+  font-weight: 600;
+}
+
+.story-content em {
+  color: var(--hp-parchment);
+}
+
+.story-title {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--hp-parchment);
+  margin-bottom: var(--space-sm);
+  line-height: 1.3;
+  letter-spacing: 1px;
+}
+
+.story-meta {
+  display: flex;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-xl);
+  padding-bottom: var(--space-lg);
+  border-bottom: 1px solid rgba(211, 166, 37, 0.1);
+}
+
+.story-meta-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-family: var(--font-body);
+}
+
+/* Story controls sidebar */
+.story-controls {
+  position: sticky;
+  top: 0;
+}
+
+.control-group {
+  margin-bottom: var(--space-xl);
+}
+
+.control-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--text-muted);
+  margin-bottom: var(--space-md);
+  font-family: var(--font-body);
+}
+
+/* ── Consistency Dashboard ────────────────────────────────── */
+.health-score-ring {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto var(--space-xl);
+  position: relative;
+}
+
+.health-score-ring svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.health-score-ring circle {
+  fill: none;
+  stroke-width: 5;
+}
+
+.health-score-ring .ring-bg {
+  stroke: rgba(211, 166, 37, 0.06);
+}
+
+.health-score-ring .ring-fill {
+  stroke: var(--sl-sage);
+  stroke-dasharray: 339.292;
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 1.5s ease-out;
+  stroke-linecap: round;
+}
+
+.health-score-value {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-mono);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--hp-parchment);
+}
+
+.issue-item {
+  padding: var(--space-md);
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(211, 166, 37, 0.06);
+  margin-bottom: var(--space-sm);
+  transition: all var(--transition-fast);
+  background: rgba(0, 0, 0, 0.15);
+}
+
+.issue-item:hover {
+  border-color: rgba(211, 166, 37, 0.15);
+  background: rgba(211, 166, 37, 0.03);
+}
+
+.issue-severity {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: var(--space-xs);
+}
+
+.issue-severity.contradiction { color: #C62828; }
+.issue-severity.warning { color: var(--sl-warm-yellow); }
+.issue-severity.info { color: #5C86B4; }
+
+.issue-message {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  font-family: var(--font-body);
+}
+
+.issue-suggestion {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: var(--space-xs);
+  font-style: italic;
+}
+
+/* ── Select / Dropdown ────────────────────────────────────── */
+.select-wrapper {
+  position: relative;
+}
+
+.custom-select {
+  width: 100%;
+  padding: var(--space-sm) var(--space-md);
+  padding-right: 36px;
+  background: rgba(13, 13, 22, 0.9);
+  border: 1px solid rgba(211, 166, 37, 0.1);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  appearance: none;
+  cursor: pointer;
+  transition: border-color var(--transition-fast);
+}
+
+.custom-select:focus {
+  outline: none;
+  border-color: var(--hp-gold);
+}
+
+.select-arrow {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  pointer-events: none;
+  font-size: 0.7rem;
+}
+
+/* ── Loading / Skeleton ───────────────────────────────────── */
+.skeleton {
+  background: linear-gradient(90deg, var(--bg-elevated), var(--bg-panel), var(--bg-elevated));
+  background-size: 200% 100%;
+  animation: skeletonShimmer 1.5s ease-in-out infinite;
+  border-radius: var(--radius-sm);
+}
+
+@keyframes skeletonShimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ── Typewriter Effect ────────────────────────────────────── */
+.typewriter {
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid var(--hp-gold);
+  animation: typewriterBlink 1s step-end infinite;
+}
+
+@keyframes typewriterBlink {
+  0%, 100% { border-color: var(--hp-gold); }
+  50% { border-color: transparent; }
+}
+
+/* ── Tooltip ──────────────────────────────────────────────── */
+.tooltip {
+  position: relative;
+}
+
+.tooltip::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-8px);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--bg-panel);
+  border: 1px solid rgba(211, 166, 37, 0.15);
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  color: var(--text-primary);
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-fast), transform var(--transition-fast);
+  z-index: 100;
+  font-family: var(--font-body);
+}
+
+.tooltip:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-4px);
+}
+
+/* ── Relationship Graph ───────────────────────────────────── */
+.relationship-graph {
+  width: 100%;
+  height: 500px;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(211, 166, 37, 0.08);
+  background: var(--bg-surface);
+  overflow: hidden;
+}
+
+.relationship-graph canvas {
+  width: 100%;
+  height: 100%;
+}
+
+/* ── No Content State ─────────────────────────────────────── */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-3xl);
+  text-align: center;
+}
+
+.empty-icon {
+  font-size: 4rem;
+  margin-bottom: var(--space-lg);
+  opacity: 0.3;
+}
+
+.empty-title {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-sm);
+  letter-spacing: 1px;
+}
+
+.empty-desc {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  max-width: 400px;
+  font-family: var(--font-body);
+  font-style: italic;
+}
+
+/* ── World Stats Bar ──────────────────────────────────────── */
+.world-stats-bar {
+  display: flex;
+  gap: var(--space-xl);
+  padding: var(--space-lg) var(--space-xl);
+  background: rgba(13, 13, 22, 0.6);
+  backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid rgba(211, 166, 37, 0.08);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-xl);
+}
+
+.world-stat {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.world-stat-icon {
+  font-size: 1.3rem;
+}
+
+.world-stat-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.world-stat-value {
+  font-family: var(--font-mono);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--hp-gold);
+}
+
+.world-stat-label {
+  font-size: 0.6rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-family: var(--font-body);
+}
+
+/* ── Responsive ───────────────────────────────────────────── */
+@media (max-width: 1200px) {
+  .story-layout {
+    grid-template-columns: 1fr;
+  }
+  
+  .map-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .header-nav {
+    display: none;
+  }
+  
+  .genesis-title {
+    font-size: 1.8rem;
+  }
+  
+  .character-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .grid-3 {
+    grid-template-columns: 1fr;
+  }
+  
+  .world-stats-bar {
+    flex-wrap: wrap;
+    gap: var(--space-md);
+  }
+}
+
+/* ── Utility Classes ──────────────────────────────────────── */
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-accent { color: var(--hp-gold); }
+.text-gold { color: var(--hp-gold-light); }
+.text-muted { color: var(--text-muted); }
+.mt-sm { margin-top: var(--space-sm); }
+.mt-md { margin-top: var(--space-md); }
+.mt-lg { margin-top: var(--space-lg); }
+.mt-xl { margin-top: var(--space-xl); }
+.mb-md { margin-bottom: var(--space-md); }
+.mb-lg { margin-bottom: var(--space-lg); }
+.mb-xl { margin-bottom: var(--space-xl); }
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.items-center { align-items: center; }
+.justify-center { justify-content: center; }
+.gap-sm { gap: var(--space-sm); }
+.gap-md { gap: var(--space-md); }
+.gap-lg { gap: var(--space-lg); }
+.w-full { width: 100%; }
+.hidden { display: none !important; }
+.opacity-0 { opacity: 0; }
